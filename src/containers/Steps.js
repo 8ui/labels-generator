@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { changeStep } from '../actions';
+import { getStep, getLoading } from '../selectors';
 import theme from '../theme';
 import styled from 'styled-components';
 
 import Tabs from '../components/Tabs.js';
 import Buttons from '../components/Buttons.js';
+import Loading from '../components/Loading.js';
 
 // Steps
 import ExcelTable from '../components/ExcelTable.js';
@@ -23,6 +25,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  *, :after, :before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 `
 
 class Steps extends React.Component {
@@ -55,7 +58,13 @@ class Steps extends React.Component {
   )
 
   renderStep = () => {
-    switch (this.props.step) {
+    const { step, loading } = this.props
+
+    if (loading) {
+      return <Loading />
+    }
+
+    switch (step) {
       case 0:
         return this.renderExcel()
       case 1:
@@ -87,7 +96,8 @@ class Steps extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  step: state.main.step,
+  step: getStep(state),
+  loading: getLoading(state),
 })
 
 export default connect(mapStateToProps)(Steps);

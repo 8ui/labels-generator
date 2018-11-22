@@ -25,26 +25,22 @@ class ExcelTable extends React.Component {
         rowHeights: 30,
         minRows: config.minRows,
         maxRows: config.maxRows,
-        colWidths: (1110 - theme.paddingHorizontal) / colHeaders.length,
+        colWidths: theme.width / colHeaders.length,
         columnSorting: true,
       },
-    }
+    };
+
+    this.hotTableComponent = React.createRef();
   }
 
-  onBeforePaste = (data) => {
-    data.forEach(n => {
-      if (n[3]) {
-        n[3] = n[3].replace(/\s/, '');
-        n[3] = n[3].replace(',', '.');
-      }
-    })
-    return data;
+  componentDidMount() {
+    this.hotTableComponent.current.hotInstance.selectCell(0,0);
   }
 
   onBeforeHotChange = (changes) => {
     const newData = this.props.data.slice(0);
 
-    for (let [row, column, oldValue, newValue] of changes) {
+    for (let [row, column, oldValue, newValue] of changes) { // eslint-disable-line
       if (!newData[row]){
         newData[row] = [];
       }
@@ -64,7 +60,7 @@ class ExcelTable extends React.Component {
       <Wrapper>
         <HotTable
           root="hot"
-          beforePaste={this.onBeforePaste}
+          ref={this.hotTableComponent}
           beforeChange={this.onBeforeHotChange}
           data={data}
           settings={{

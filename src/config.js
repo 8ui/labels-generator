@@ -1,4 +1,4 @@
 export default {
-  minRows: 40,
+  minRows: 100,
   maxRows: 100,
 }

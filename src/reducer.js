@@ -7,6 +7,7 @@ const initialState = {
   label: '57c7e5353ce7d5f10c8b4b4b',
   step: 0,
   email: '',
+  loading: false,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -19,6 +20,8 @@ const mainReducer = (state = initialState, action) => {
    return {...state, label: action.payload}
   case 'CHANGE_STEP':
    return {...state, step: action.payload}
+  case 'STEP_LOADING':
+   return {...state, loading: action.payload}
   default:
    return state
  }

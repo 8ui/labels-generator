@@ -20,7 +20,7 @@ export const fields = [
     name: 'barcode',
     label: 'Штрих-код',
     settings: {
-      type: 'numeric',
+      type: 'text',
     },
   },
   {
@@ -34,10 +34,7 @@ export const fields = [
     name: 'price',
     label: 'Цена',
     settings: {
-      type: 'numeric',
-      numericFormat: {
-        pattern: '0,0.00',
-      },
+      type: 'text',
     },
   },
   {

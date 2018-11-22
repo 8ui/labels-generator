@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 
 const Background = props => {
+  if (props.inverted) {
+    return 'transparent';
+  }
   switch (props.color) {
     case 'white':
       return 'white';
@@ -14,6 +17,9 @@ const Background = props => {
 }
 
 const BackgroundHover = props => {
+  if (props.inverted) {
+    return 'transparent';
+  }
   switch (props.color) {
     case 'white':
       return 'white';
@@ -27,7 +33,7 @@ const BackgroundHover = props => {
 const BorderColor = props => {
   switch (props.color) {
     case 'white':
-      return 'rgba(34,36,38,.15)';
+      return props.inverted ? 'white' : 'rgba(34,36,38,.15)';
     case 'green':
       return '#2baf4a';
     default:
@@ -38,7 +44,7 @@ const BorderColor = props => {
 const BorderColorHover = props => {
   switch (props.color) {
     case 'white':
-      return 'rgba(34,36,38,.35)';
+      return props.inverted ? 'white' : 'rgba(34,36,38,.35)';
     case 'green':
       return '#25943f';
     default:
@@ -49,7 +55,7 @@ const BorderColorHover = props => {
 const Color = props => {
   switch (props.color) {
     case 'white':
-      return 'rgba(0,0,0,.6)';
+      return props.inverted ? 'white' : 'rgba(0,0,0,.6)';
     case 'green':
       return 'white';
     default:
@@ -57,16 +63,18 @@ const Color = props => {
   }
 }
 
-const Wrapper = styled.a`
+const Wrapper = styled.button`
   display: inline-flex;
   padding: 10px 25px;
   border-radius: 3px;
   background: ${Background};
   color: ${Color};
-  font-size: 15px;
-  cursor: pointer;
+  font-size: 16px;
   text-align: center;
-  border: 1px solid ${BorderColor};
+  border: 1px ${props => props.inverted ? 'dashed' : 'solid'} ${BorderColor};
+  outline: none;
+  opacity: ${props => props.disabled ? 0.4 : 1}
+  cursor: ${props => props.disabled ? 'default' : 'pointer'}
 
   &:hover {
     background: ${BackgroundHover};

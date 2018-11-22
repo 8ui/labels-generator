@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeLabel } from '../actions';
 import { labels } from '../domain';
+import theme from '../theme';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   background: white;
-  width: 1090px;
+  width: ${theme.width}px;
   padding-top: 40px;
   display: flex;
   justify-content: center;
