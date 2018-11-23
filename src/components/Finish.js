@@ -225,7 +225,7 @@ class Component extends React.Component {
         <FinishText>
           <div>Письмо с ценниками отправлено<br /> на <span>{email}</span></div>
           <div>
-            <Button inverted color="white" onClick={this.onRestart}>Сделать еще</Button>
+            <Button inverted color="white" onClick={this.onRestart}>Создать еще</Button>
           </div>
         </FinishText>
       )
@@ -243,6 +243,7 @@ class Component extends React.Component {
           <Input>
             <input
               ref={e => { this.input = e; }}
+              required=""
               placeholder="example@mail.com"
               onChange={this.onChange}
               value={email}

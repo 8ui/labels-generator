@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCalcProducts, getStep, getLabel, getLoading } from '../selectors';
+import { getCalcProducts, getLabel, getLoading } from '../selectors';
 import { labels } from '../domain';
 import { pluralForm } from '../utils';
 import theme from '../theme';
@@ -131,11 +131,9 @@ class Buttons extends React.Component {
             {this.renderHelper()}
             <div>
               {step > 0 && <Button onClick={onBack}>Назад</Button>}
-              {step < 2 &&
-                <Button disabled={loading} color="green" onClick={onForward}>
-                  Далее
-                </Button>
-              }
+              <Button disabled={loading} color="green" onClick={onForward}>
+                Далее
+              </Button>
             </div>
           </Container>
         </Wrapper>
@@ -145,7 +143,6 @@ class Buttons extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  step: getStep(state),
   label: getLabel(state),
   loading: getLoading(state),
   products: getCalcProducts(state),

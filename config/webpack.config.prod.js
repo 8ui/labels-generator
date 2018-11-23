@@ -33,7 +33,7 @@ const shouldUseRelativeAssetPaths = publicPath === './';
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
 // makes for a smoother build process.
-const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
+const shouldInlineRuntimeChunk = false;
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -200,7 +200,7 @@ module.exports = {
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+    runtimeChunk: false,
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -260,7 +260,7 @@ module.exports = {
             options: {
               formatter: require.resolve('react-dev-utils/eslintFormatter'),
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -293,7 +293,7 @@ module.exports = {
               customize: require.resolve(
                 'babel-preset-react-app/webpack-overrides'
               ),
-              
+
               plugins: [
                 [
                   require.resolve('babel-plugin-named-asset-import'),
@@ -331,7 +331,7 @@ module.exports = {
               cacheDirectory: true,
               // Save disk space when time isn't as important
               cacheCompression: true,
-              
+
               // If an error happens in a package, it's possible to be
               // because it was compiled. Thus, we don't want the browser
               // debugger to show the original code. Instead, the code

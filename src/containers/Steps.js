@@ -7,7 +7,6 @@ import styled from 'styled-components';
 
 import Tabs from '../components/Tabs.js';
 import Buttons from '../components/Buttons.js';
-import Loading from '../components/Loading.js';
 
 // Steps
 import ExcelTable from '../components/ExcelTable.js';
@@ -29,6 +28,18 @@ const Wrapper = styled.div`
 `
 
 class Steps extends React.Component {
+  state = {
+    prevStep: this.props.step,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.step !== this.props.step) {
+      this.setState({prevStep: this.props.step});
+    } else if (!nextProps.loading && this.props.loading) {
+      this.setState({prevStep: nextProps.step});
+    }
+  }
+
   onForward = (e) => {
     e.preventDefault();
 
@@ -58,13 +69,9 @@ class Steps extends React.Component {
   )
 
   renderStep = () => {
-    const { step, loading } = this.props
+    const { prevStep } = this.state
 
-    if (loading) {
-      return <Loading />
-    }
-
-    switch (step) {
+    switch (prevStep) {
       case 0:
         return this.renderExcel()
       case 1:
@@ -78,6 +85,7 @@ class Steps extends React.Component {
 
   renderButtons = () => (
     <Buttons
+      step={this.state.prevStep}
       onBack={this.onBack}
       onForward={this.onForward}
     />
